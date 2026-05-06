@@ -3,7 +3,7 @@ import '../App.css';
 import searchIcon from '../assets/search_green.png';
 import sortIcon from '../assets/sort_green.png';
 import plusIcon from '../assets/plus_green.png';
-import { RecipeList } from '../components/RecipeList';
+import RecipeList from '../components/RecipeList';
 
 export default function Home() {
   return (

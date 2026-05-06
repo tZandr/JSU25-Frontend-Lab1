@@ -1,8 +1,13 @@
-export function RecipeList() {
+import { useFetchRecipes } from '../hooks/RecipeHook';
+import RecipeCard from './RecipeCard';
+
+export default function RecipeList() {
+  const recipes = useFetchRecipes();
   return (
-    <div>
-      <h1>Home - Recipe List</h1>
-      <p>Welcome to the Home and recipe list page!</p>
+    <div className="recipe-list">
+      {recipes.map((recipe) => (
+        <RecipeCard key={recipe.id} recipe={recipe} />
+      ))}
     </div>
   );
 }
