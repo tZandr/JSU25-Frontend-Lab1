@@ -5,11 +5,12 @@ export type Recipe = {
   instructions: string[];
   prepTimeMinutes: number;
   cookTimeMinutes: number;
-  serving: number;
+  servings: number;
   difficulty: string;
   cuisine: string;
   caloriesPerServing: number;
   tags: string[];
+  mealType: string[];
   image: string;
   rating: number;
 };
