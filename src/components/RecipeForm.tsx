@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createRecipe } from '../hooks/RecipeHook';
 import '../pages/RecipeCreate.css';
+import ErrorMessage from './ErrorMesssage';
 
 export default function RecipeForm() {
   const navigate = useNavigate();
@@ -21,14 +22,16 @@ export default function RecipeForm() {
     rating: 0,
   });
 
+  const [error, setError] = useState<string | null>(null);
+
   async function handleSubmit(e: { preventDefault: () => void }) {
     e.preventDefault();
+    setError(null);
     let newRecipe;
     try {
       newRecipe = await createRecipe(draft);
-      console.log('API response:', newRecipe);
-    } catch (error) {
-      console.error('Failed to create recipe:', error);
+    } catch {
+      setError('Failed to save recipe. Please try again.');
     }
     const recipeToAdd = newRecipe ?? { ...draft, id: Date.now() };
     navigate('/', { state: { newRecipe: recipeToAdd } });
@@ -46,6 +49,7 @@ export default function RecipeForm() {
 
   return (
     <form className="CreateForm" onSubmit={handleSubmit}>
+      {error && <ErrorMessage message={error} />}
       <label>Name
         <input value={draft.name} onChange={e => setDraft({ ...draft, name: e.target.value })} required />
       </label>

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { Recipe } from '../types/Recipe';
 import './RecipeModal.css';
 import { updateRecipe } from '../hooks/RecipeHook';
+import ErrorMessage from './ErrorMesssage';
 
 type RecipeModalProps = {
   recipe: Recipe;
@@ -14,17 +15,23 @@ export default function RecipeModal({ recipe, onClose, onDelete, onEdit }: Recip
   const [edit, setEdit] = useState(false);
   const [draft, setDraft] = useState<Recipe>(recipe);
   const [confirmDelete, setConfirmDelete] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   async function handleSave() {
-    await updateRecipe(draft);
-    onEdit(draft);
-    setEdit(false);
+    try {
+      await updateRecipe(draft);
+      onEdit(draft);
+      setEdit(false);
+    } catch {
+      setError('Failed to save changes. Please try again.');
+    }
   }
 
   return (
     <div className="ModalBackdrop" onClick={onClose}>
       <div className="ModalContent" onClick={(e) => e.stopPropagation()}>
         <button className="ModalClose" onClick={onClose}>✕</button>
+        {error && <ErrorMessage message={error} />}
         <img src={recipe.image} alt={recipe.name} />
         <div className="ModalHeader">
           <div>

@@ -4,16 +4,18 @@ import type { Recipe } from '../types/Recipe';
 export function useFetchRecipes(prepend?: Recipe) {
   const [data, setData] = useState<Recipe[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchData() {
       setLoading(true);
+      setError(null);
       try {
         const res = await fetch('https://dummyjson.com/recipes');
         const json = await res.json();
         setData(prepend ? [prepend, ...json.recipes] : json.recipes);
-      } catch (error) {
-        console.error('Error: ', error);
+      } catch {
+        setError('Failed to load recipes. Please try again.');
       } finally {
         setLoading(false);
       }
@@ -21,7 +23,7 @@ export function useFetchRecipes(prepend?: Recipe) {
     fetchData();
   }, []);
 
-  return { data, setData, loading };
+  return { data, setData, loading, error };
 }
 
 export async function updateRecipe(updated: Recipe): Promise<Recipe> {
