@@ -5,11 +5,22 @@ import type { Recipe } from '../types/Recipe';
 import RecipeCard from './RecipeCard';
 import RecipeModal from './RecipeModal';
 
-export default function RecipeList() {
+type Props = {
+  query: string;
+  difficulty: string;
+};
+
+export default function RecipeList({ query, difficulty }: Props) {
   const location = useLocation();
   const newRecipe = location.state?.newRecipe as Recipe | undefined;
   const { data: recipes, setData: setRecipes, loading } = useFetchRecipes(newRecipe);
   const [selected, setSelected] = useState<Recipe | null>(null);
+
+  const filtered = recipes.filter(r => {
+    const matchesQuery = r.name.toLowerCase().includes(query.toLowerCase());
+    const matchesDifficulty = difficulty === 'All' || r.difficulty === difficulty;
+    return matchesQuery && matchesDifficulty;
+  });
 
   async function handleDelete(recipe: Recipe) {
     await deleteRecipe(recipe);
@@ -26,7 +37,7 @@ export default function RecipeList() {
 
   return (
     <div className="recipe-list">
-      {recipes.map(recipe => (
+      {filtered.map(recipe => (
         <RecipeCard key={recipe.id} recipe={recipe} onClick={() => setSelected(recipe)} />
       ))}
       {selected && (
