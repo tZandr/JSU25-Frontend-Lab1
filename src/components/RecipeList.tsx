@@ -1,11 +1,14 @@
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useFetchRecipes, deleteRecipe } from '../hooks/RecipeHook';
 import type { Recipe } from '../types/Recipe';
 import RecipeCard from './RecipeCard';
 import RecipeModal from './RecipeModal';
 
 export default function RecipeList() {
-  const { data: recipes, setData: setRecipes, loading } = useFetchRecipes();
+  const location = useLocation();
+  const newRecipe = location.state?.newRecipe as Recipe | undefined;
+  const { data: recipes, setData: setRecipes, loading } = useFetchRecipes(newRecipe);
   const [selected, setSelected] = useState<Recipe | null>(null);
 
   async function handleDelete(recipe: Recipe) {

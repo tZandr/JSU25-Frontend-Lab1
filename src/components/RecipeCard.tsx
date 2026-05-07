@@ -9,7 +9,10 @@ type RecipeCardProps = {
 export default function RecipeCard({ recipe, onClick }: RecipeCardProps) {
   return (
     <div className="RecipeCard" onClick={onClick}>
-      <img src={recipe.image} alt={recipe.name} />
+      {recipe.image
+        ? <img src={recipe.image} alt={recipe.name} />
+        : <div className="RecipeImagePlaceholder" />
+      }
       <div className="RecipeInfo">
         <h3>{recipe.name}</h3>
         <p className="RecipeMeta">
