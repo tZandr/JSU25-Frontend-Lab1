@@ -1,0 +1,62 @@
+.CreateForm {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  text-align: left;
+}
+
+.CreateForm label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.CreateForm input,
+.CreateForm textarea {
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: var(--sans);
+  background: #fff;
+}
+
+.CreateForm textarea {
+  min-height: 72px;
+  resize: vertical;
+}
+
+.CreateRow {
+  display: flex;
+  gap: 12px;
+}
+
+.CreateRow label {
+  flex: 1;
+}
+
+.AddItemButton {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary);
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  padding: 0;
+}
+
+.SubmitButton {
+  margin-top: 8px;
+  padding: 12px;
+  background: var(--primary);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+}
