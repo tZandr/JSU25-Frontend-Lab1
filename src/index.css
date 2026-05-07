@@ -1,11 +1,11 @@
 :root {
   --text: #333;
   --text-h: #333;
-  --bg: #FAFAFA;
-  --border: #A5D6A7;
-  --primary: #4CAF50;
-  --secondary: #A5D6A7;
-  --accent: #FF9800;
+  --bg: #fafafa;
+  --border: #a5d6a7;
+  --primary: #4caf50;
+  --secondary: #a5d6a7;
+  --accent: #ff9800;
   --accent-bg: rgba(255, 152, 0, 0.1);
   --accent-border: rgba(255, 152, 0, 0.5);
   --shadow:
@@ -54,7 +54,10 @@ nav a {
   text-decoration: none;
   padding: 10px 16px;
   border-radius: 999px;
-  transition: background-color 0.25s ease, color 0.25s ease, transform 0.2s ease;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.2s ease;
 }
 
 nav a:hover,
@@ -85,6 +88,12 @@ h2 {
   margin: 0 0 8px;
 }
 
-p {
+h3 {
   margin: 0;
+  color: rgb(15, 80, 15);
+}
+
+p, small {
+  margin: 0;
+  color: rgb(64, 88, 64);
 }
