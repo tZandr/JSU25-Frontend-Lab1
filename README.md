@@ -1,73 +1,20 @@
-# React + TypeScript + Vite
+# JSU25S - React.JS Webbapplication
+Recept app av Alexander Tjernström
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Vad gör appen?
+Applikationen gör att användaren kan scrolla igenom en lista recept och kan klicka på recepten för att få en fullständig instruktion. Man kan också skapa och ladda upp ett eget recept genom att klicka på +-tecknet i övre högre hörnet.
 
-Currently, two official plugins are available:
+Det går även att söka recept, som live-filtrerar recepten i appen. Det finns även en filtreringsfunktion på svårighetsgrad. Det är tänkt att kunna söka på "cuisine" och max antal minter också.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+# Vilket API används?
+Applikationen använder sig av dummyjsons recept-API.
 
-## React Compiler
+# Hur används CRUD i appen?
+CREATE sker när man trycker på "Save Recipe" på sidan man lägger till recept. Receptet postas då till API:t, "prependas" och man navigeras tillbaka till hemskärmen där nya receptet nu ligger högst upp.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+READ sker sekunden appen laddar genom att ladda alla recept som redan finns i API.
+Medan API:t laddas står det "loading...".
 
-## Expanding the ESLint configuration
+UPDATE/PUT, samt DELETE finns om man klickar på ett recept och trycker på antingen edit eller delete. Edit gör om alla fält i receptet till inputs/textareas genom useState ocb ternaries, och sparar under tiden den tidigare sparade informationen i en draft som raderas om man trycker save, eller läggs tillbaka i receptet om redigeringen avbryts.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+DELETE ligger bredvid edit och använder också useState, samt ternary funktion för att bekräfta raderingen av receptet.
