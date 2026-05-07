@@ -72,6 +72,11 @@ export default function RecipeForm() {
         <input type="number" value={draft.servings} onChange={e => setDraft({ ...draft, servings: +e.target.value })} />
       </label>
 
+      <label>Image URL
+        <input type="url" value={draft.image} placeholder="https://..." onChange={e => setDraft({ ...draft, image: e.target.value })} />
+      </label>
+      {draft.image && <img src={draft.image} alt="Preview" className="ImagePreview" />}
+
       <label>Ingredients</label>
       {draft.ingredients.map((item, i) => (
         <input key={i} value={item} placeholder={`Ingredient ${i + 1}`}
