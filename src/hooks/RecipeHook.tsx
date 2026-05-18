@@ -41,7 +41,6 @@ export async function deleteRecipe(deleted: Recipe): Promise<void> {
   await fetch(`${API}/recipes/${deleted.id}`, {
     method: 'DELETE',
   });
-  console.log(`Deleted recipe: ${deleted.name}`);
 }
 
 export async function createRecipe(newRecipe: Omit<Recipe, 'id'>): Promise<Recipe> {
