@@ -39,7 +39,7 @@ export default function RecipeList({ query, difficulty }: Props) {
     setSelected(updated);
   }
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <div className="Spinner" />;
   if (error) return <ErrorMessage message={error} />;
 
   return (
