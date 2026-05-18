@@ -2,7 +2,7 @@ import { useState } from 'react';
 import type { Recipe } from '../types/Recipe';
 import './RecipeModal.css';
 import { updateRecipe } from '../hooks/RecipeHook';
-import ErrorMessage from './ErrorMesssage';
+import ErrorMessage from './ErrorMessage';
 
 type RecipeModalProps = {
   recipe: Recipe;

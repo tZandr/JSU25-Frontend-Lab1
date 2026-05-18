@@ -1,20 +1,77 @@
-# JSU25S - React.JS Webbapplication
-Recept app av Alexander Tjernström
+# Recipe App
 
-# Vad gör appen?
-Applikationen gör att användaren kan scrolla igenom en lista recept och kan klicka på recepten för att få en fullständig instruktion. Man kan också skapa och ladda upp ett eget recept genom att klicka på +-tecknet i övre högre hörnet.
+A recipe management web app built with React and TypeScript. Browse, search, filter, create, edit, and delete recipes — all powered by a live REST API.
 
-Det går även att söka recept, som live-filtrerar recepten i appen. Det finns även en filtreringsfunktion på svårighetsgrad. Det är tänkt att kunna söka på "cuisine" och max antal minter också.
+---
 
-# Vilket API används?
-Applikationen använder sig av dummyjsons recept-API.
+## Features
 
-# Hur används CRUD i appen?
-CREATE sker när man trycker på "Save Recipe" på sidan man lägger till recept. Receptet postas då till API:t, "prependas" och man navigeras tillbaka till hemskärmen där nya receptet nu ligger högst upp.
+- **Browse** a list of recipes fetched from a public API on load
+- **Search** recipes by name with live filtering as you type
+- **Filter** by difficulty (Easy / Medium / Hard)
+- **View** full recipe details including ingredients and step-by-step instructions
+- **Create** new recipes with a form that includes a live image preview and dynamic ingredient/instruction lists
+- **Edit** any recipe inline — fields become inputs, with a draft/cancel pattern so no changes are committed until you save
+- **Delete** recipes with a confirmation step to prevent accidents
 
-READ sker sekunden appen laddar genom att ladda alla recept som redan finns i API.
-Medan API:t laddas står det "loading...".
+---
 
-UPDATE/PUT, samt DELETE finns om man klickar på ett recept och trycker på antingen edit eller delete. Edit gör om alla fält i receptet till inputs/textareas genom useState ocb ternaries, och sparar under tiden den tidigare sparade informationen i en draft som raderas om man trycker save, eller läggs tillbaka i receptet om redigeringen avbryts.
+## Tech Stack
 
-DELETE ligger bredvid edit och använder också useState, samt ternary funktion för att bekräfta raderingen av receptet.
+| | |
+|---|---|
+| Framework | React 19 with TypeScript (strict mode) |
+| Routing | React Router DOM v7 |
+| Build tool | Vite |
+| Styling | Plain CSS with custom properties |
+| API | [DummyJSON Recipes](https://dummyjson.com/recipes) |
+
+---
+
+## Getting Started
+
+```bash
+npm install
+npm run dev
+```
+
+App runs at `http://localhost:5173` by default.
+
+```bash
+npm run build   # production build
+npm run preview # preview the production build locally
+```
+
+---
+
+## Project Structure
+
+```
+src/
+├── components/     # Reusable UI components (card, modal, form, search, filter)
+├── hooks/          # API logic — fetch, create, update, delete
+├── pages/          # Home and RecipeCreate page components
+├── layouts/        # MainLayout wrapper for routing
+├── types/          # TypeScript type definitions
+└── router.tsx      # Route configuration
+```
+
+---
+
+## How CRUD Works
+
+**Create** — Fill in the form at `/new` and click Save. The recipe is POST'd to the API, then prepended to the list on the home screen without a full reload.
+
+**Read** — Recipes are fetched from the API on mount via a custom `useFetchRecipes` hook. Loading and error states are handled separately.
+
+**Update** — Click any recipe to open the modal, then hit Edit. All fields switch to inputs/textareas. Changes are held in a local draft until you save (PUT) or cancel, which restores the original.
+
+**Delete** — From the modal, click Delete. A confirmation prompt appears before the DELETE request is sent and the recipe is removed from the list.
+
+---
+
+## Known Limitations
+
+- Uses DummyJSON as a mock API — changes don't persist between sessions
+- No pagination; all recipes are loaded at once
+- No authentication

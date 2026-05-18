@@ -4,7 +4,7 @@ import { useFetchRecipes, deleteRecipe } from '../hooks/RecipeHook';
 import type { Recipe } from '../types/Recipe';
 import RecipeCard from './RecipeCard';
 import RecipeModal from './RecipeModal';
-import ErrorMessage from './ErrorMesssage';
+import ErrorMessage from './ErrorMessage';
 
 type Props = {
   query: string;

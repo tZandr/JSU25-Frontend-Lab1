@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createRecipe } from '../hooks/RecipeHook';
 import '../pages/RecipeCreate.css';
-import ErrorMessage from './ErrorMesssage';
+import ErrorMessage from './ErrorMessage';
 
 export default function RecipeForm() {
   const navigate = useNavigate();
